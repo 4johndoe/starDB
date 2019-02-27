@@ -5,7 +5,7 @@ lifetime hooks:
     
     UPDATES:
         New Props  \
-                      => render() => componentDidUpdate()
+                      => render() => componentDidUpdate(prevProps, prevState)
         setStqte() /
             
     UNMOUNTING:
