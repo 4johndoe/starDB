@@ -5,13 +5,19 @@ import ItemList from '../item-list';
 import PersonDetails from '../person-details';
 
 import './app.css';
+import ErrorButton from "../error-button";
+import ErrorIndicator from "../error-indicator";
+
 
 export default class App extends Component {
 
     state = {
         showRandomPlanet: true,
-        selectedPerson: 5
+        selectedPerson: 5,
+        hasError: false
     };
+
+    toggleRandomPlanet = () => {};
 
     onPersonSelected = (id) => {
         this.setState({
@@ -19,13 +25,30 @@ export default class App extends Component {
         });
     };
 
+    componentDidCatch(error, errorInfo) {
+        console.log('componentDidCatch');
+        this.setState({ hasError: true });
+    }
+
     render() {
+
+        if (this.state.hasError) {
+            return <ErrorIndicator/>
+        }
 
         return (
             <div className="stardb-app">
                 <Header/>
                 <RandomPlanet/>
 
+                <div className="row mb2 button-row">
+                    <button
+                        className="toggle-planet btn btn-warning btn-lg"
+                        onClick={this.toggleRandomPlanet}>
+                        Toggle Random Planet
+                    </button>
+                    <ErrorButton/>
+                </div>
                 <div className="row mb2">
                     <div className="col-md-6">
                         <ItemList onItemSelected={this.onPersonSelected}/>
