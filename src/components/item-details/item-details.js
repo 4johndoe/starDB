@@ -8,7 +8,8 @@ export default class ItemDetails extends Component {
     swapiService = new SwapiService();
 
     state = {
-        item: null
+        item: null,
+        image: null
     };
 
     componentDidMount() {
@@ -22,20 +23,25 @@ export default class ItemDetails extends Component {
     }
 
     updateItem() {
-        const { itemId, getData } = this.props;
+        const { itemId, getData, getImageUrl } = this.props;
         if (!itemId) {
             return;
         }
 
         getData(itemId)
             .then((item) => {
-                this.setState({ item });
-            })
+                this.setState({
+                    item,
+                    image: getImageUrl(item)
+                });
+            });
     }
 
     render() {
 
-        if (!this.state.item) {
+        const { item, image } = this.state;
+
+        if (!item) {
             return <span>Select item from a list</span>;
         }
 
@@ -45,7 +51,7 @@ export default class ItemDetails extends Component {
         return (
             <div className="item-details card">
                 <img className="item-image"
-                     src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`}
+                     src={image }
                      alt="character"/>
 
                 <div className="card-body">
