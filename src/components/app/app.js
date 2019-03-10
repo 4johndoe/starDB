@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Header from '../header';
-import RandomPlanet from '../random-planet';
+// import RandomPlanet from '../random-planet';
 import SwapiService from "../../services/swapi-service";
 import ItemDetails from '../item-details';
 import ErrorBoundry from "../error-boundry";
@@ -27,9 +27,9 @@ export default class App extends Component {
 
     render() {
 
-        const planet = this.state.showRandomPlanet ?
-            <RandomPlanet/> :
-            null;
+        // const planet = this.state.showRandomPlanet ?
+        //     <RandomPlanet/> :
+        //     null;
 
         const { getPerson,
                 getStarship,
@@ -53,6 +53,9 @@ export default class App extends Component {
                 itemId={5}
                 getData={getStarship}
                 getImageUrl={getStarshipImage} >
+
+                <Record field="gender" label="Gender" />
+                <Record field="eyeColor" label="Eye Color" />
             </ItemDetails>
         );
 
